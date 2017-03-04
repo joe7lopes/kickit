@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Kickit</string>
+    <string name="action_feed">Feed</string>
+    <string name="action_club">Club</string>
+    <string name="action_personal_area">Personal Area</string>
+    <string name="action_settings">Settings</string>
+
 </resources>
