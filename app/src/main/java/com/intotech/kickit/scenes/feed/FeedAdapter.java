@@ -3,7 +3,6 @@ package com.intotech.kickit.scenes.feed;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.intotech.kickit.R;
@@ -18,20 +17,20 @@ import java.util.List;
 public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final FeedDataVM feedData;
-    private final int MATCHES = 0;
-    private final int FEED = 1;
+    private static final int MATCHES = 0;
+    private static final int FEED = 1;
 
-    public FeedAdapter(FeedDataVM feedData) {
+    FeedAdapter(FeedDataVM feedData) {
         this.feedData = feedData;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if(viewType == MATCHES){
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        if (viewType == MATCHES) {
             ItemFeedMatchesBinding itemMatches = DataBindingUtil.inflate(inflater, R.layout.item_feed_matches, parent, false);
             return new FeedMatchesViewHolder(itemMatches);
-        }else{
+        } else {
             ItemFeedBinding itemFeedBinding = DataBindingUtil.inflate(inflater, R.layout.item_feed, parent, false);
             return new FeedAdapterViewHolder(itemFeedBinding);
         }
@@ -39,15 +38,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position==0)? MATCHES:FEED;
+        return (position == 0) ? MATCHES : FEED;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(position==0){
-            ((FeedMatchesViewHolder)holder).bindView(feedData.getListMatchesVM());
-        }else{
-            ((FeedAdapterViewHolder)holder).bindView(feedData.getListFeedVM().get(position));
+        if (position == 0) {
+            ((FeedMatchesViewHolder) holder).bindView(feedData.getListMatchesVM());
+        } else {
+            ((FeedAdapterViewHolder) holder).bindView(feedData.getListFeedVM().get(position));
         }
     }
 
@@ -56,15 +55,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return feedData.getListFeedVM().size();
     }
 
-    static class FeedAdapterViewHolder extends RecyclerView.ViewHolder {
+    private static class FeedAdapterViewHolder extends RecyclerView.ViewHolder {
         private ItemFeedBinding binding;
 
-        public FeedAdapterViewHolder(ItemFeedBinding itemView) {
+        FeedAdapterViewHolder(ItemFeedBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }
 
-        public void bindView(FeedVM feed) {
+        void bindView(FeedVM feed) {
             //TODO set image
             binding.tvTag.setText(feed.getTag());
             binding.tvHours.setText(feed.getHour());
@@ -74,15 +73,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    static class FeedMatchesViewHolder extends RecyclerView.ViewHolder{
+    private static class FeedMatchesViewHolder extends RecyclerView.ViewHolder {
         private ItemFeedMatchesBinding binding;
 
-        public FeedMatchesViewHolder(ItemFeedMatchesBinding binding) {
+        FeedMatchesViewHolder(ItemFeedMatchesBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bindView(List<MatchesFeedVM> matches) {
+        void bindView(List<MatchesFeedVM> matches) {
             binding.vpMatches.setAdapter(new MatchesFeedAdapter(matches));
         }
 

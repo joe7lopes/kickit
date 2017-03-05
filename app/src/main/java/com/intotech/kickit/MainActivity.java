@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
         mainPresenter = new MainPresenter(this);
     }
 
-
-
     @Override
     public void showFragment(BaseFragment fragment) {
         String tag = String.valueOf(fragment.getTitle());

@@ -33,7 +33,6 @@ public class FragmentFeed extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false);
-        Log.e("TAG", "onCreateView");
         return binding.getRoot();
     }
 
